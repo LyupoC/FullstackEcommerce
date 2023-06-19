@@ -7,7 +7,7 @@ import com.example.ecommercebackend.service.CheckoutService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-@CrossOrigin("http://localhost:4200")
+@CrossOrigin(origins = {"http://localhost:4200", "https://lyupoc.github.io/AnguEcomFront"})
 @RestController
 @RequestMapping("/api/checkout")
 public class CheckoutController {
