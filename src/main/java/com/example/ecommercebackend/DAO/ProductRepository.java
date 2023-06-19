@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import java.util.List;
 
 @RepositoryRestResource(collectionResourceRel = "products", path="products")
-@CrossOrigin(origins = {"http://localhost:4200", "https://lyupoc.github.io/AnguEcomFront"})
+@CrossOrigin(origins = {"http://localhost:4200", "https://lyupoc.github.io/AnguEcomFront", "https://lyupoc.github.io"})
 public interface ProductRepository extends JpaRepository<Product, Integer> {
     Page<Product> findByCategoryId(@Param("id") int id, Pageable pageable);
 
