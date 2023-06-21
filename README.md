@@ -20,7 +20,7 @@ A fullstack Ecommerce website (still under construction), current features:
 || Web | Mobile |
 |:--|:-----:|-----:|
 |List|<img src="readme_images/interfaces/index.png" width="300" alt="" />  |  <img src="readme_images/listList_mobile.png" width="210" alt="" />|
-|New List|<img src="readme_images/interfaces/shop.png" width=210" alt="" />  | <img src="readme_images/interfaces/shop_mobile.png" width="210" alt="" /> |
+|New List|<img src="readme_images/interfaces/shop.png" width="210" alt="" />  | <img src="readme_images/interfaces/shop_mobile.png" width="210" alt="" /> |
 |Update List| <img src="readme_images/interfaces/checkout.png" width="310" alt="" />  |  <img src="readme_images/interfaces/checkout_mobile.png" width="210" alt="" /> |
 |Task View|<img src="readme_images/interfaces/cart_details.png" width="310" alt="" style="min-width:300px;" />|<img src="readme_images/interfaces/cart_details_mobile.png" width="210" alt="" />|
 
