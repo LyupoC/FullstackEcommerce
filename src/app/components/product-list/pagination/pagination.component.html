@@ -1,0 +1,22 @@
+<nav aria-label="Page navigation">
+  <ul class="pagination justify-content-center mb-3">
+    <li class="page-item ">
+       <span class="page-link" (click)="decrement()"  aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+        <span class="sr-only">Previous</span>
+      </span>
+    </li>
+    <li *ngFor="let page of pages" class="page-item"  >
+
+      <span *ngIf="page !=0" [ngClass] ="{'active': page === activePage}" class="page-link" (click)="chagePage(page)">{{page}}</span>
+      <span *ngIf="page ==0" class="page-link" >{{page}}</span>
+
+    </li>
+    <li class="page-item">
+      <span class="page-link" href="" (click)="increment()" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+        <span class="sr-only"  >Next</span>
+      </span>
+    </li>
+  </ul>
+</nav>

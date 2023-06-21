@@ -1,0 +1,21 @@
+<h1 mat-dialog-title class="text-center">Product Added to Cart</h1>
+<div mat-dialog-content class="text-center" >
+  Item successfully added to cart!!
+  <div class="card product-item border-0 mb-4">
+    <div class="card-header product-img d-flex justify-content-center align-items-end overflow-hidden bg-transparent border p-0">
+      <img class="img-fluid w-50  " src="{{product!.imageUrl}}" alt="">
+    </div>
+    <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
+      <h6 class="text-truncate mb-3">{{product!.name}}</h6>
+      <div class="d-flex justify-content-center">
+        <h6>{{product!.unitPrice}}</h6><h6 class="text-muted ml-2"><del>{{product!.unitPrice}}</del></h6>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+<div mat-dialog-actions class="justify-content-end" >
+  <button mat-button mat-dialog-close class="btn btn-secondary">Continue Shopping</button>
+  <button routerLink="/cart-details" mat-button mat-dialog-close cdkFocusInitial class="btn btn-primary"> Go to Cart</button>
+</div>

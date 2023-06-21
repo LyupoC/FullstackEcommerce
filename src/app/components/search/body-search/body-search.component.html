@@ -1,0 +1,15 @@
+<div class="input-group">
+
+  <input #myInput type="text"
+         class="form-control"
+         (keyup.enter)="doSearch(myInput.value)"
+         placeholder="Search by name"
+         >
+  <div class="input-group-append">
+    <span (click)="doSearch(myInput.value)"
+          class="input-group-text bg-transparent text-primary">
+
+      <i class="fa fa-search"></i>
+    </span>
+  </div>
+</div>
