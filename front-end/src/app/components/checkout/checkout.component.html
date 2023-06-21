@@ -1,0 +1,429 @@
+<div class="container-fluid bg-secondary mb-5">
+  <div class="px-xl-5">
+    <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 300px">
+      <h1 class="font-weight-semi-bold text-uppercase mb-3">Checkout</h1>
+      <div class="d-inline-flex">
+        <p class="m-0"><a href="">Home</a></p>
+        <p class="m-0 px-2">-</p>
+        <p class="m-0">Checkout</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container  pt-5 p-5" style="min-width:67%;">
+  <div class="row px-xl-5">
+
+    <form [formGroup]="checkoutFormGroup" class="row p-0 m-0">
+      <div class="col-lg-7">
+        <div formGroupName="billingAddress" class="mb-4">
+
+          <h4 class="font-weight-semi-bold mb-4">Billing Address</h4>
+          <div class="row">
+            <div class="col-md-6 form-group">
+              <label>First Name</label>
+              <input formControlName="firstName" class="form-control" type="text" placeholder="John">
+              <div *ngIf="billingFirstName!.invalid && (billingFirstName!.dirty || billingFirstName!.touched)" class="alert alert-danger">
+                <div *ngIf="billingFirstName!.errors &&
+                     (billingFirstName!.hasError('required') || billingFirstName!.hasError('notOnlyWhiteSpace'))">
+                  FirstName is requied
+                </div>
+                <div *ngIf="billingFirstName!.errors && billingFirstName!.hasError('minlength')">
+                  FirstName is must be at least 2 characters long
+                </div>
+
+
+              </div>
+
+
+            </div>
+            <div class="col-md-6 form-group">
+              <label>Last Name</label>
+              <input formControlName="lastName" class="form-control" type="text" placeholder="Doe">
+              <div *ngIf="billingLastName!.invalid && (billingLastName!.dirty || billingLastName!.touched)" class="alert alert-danger">
+                <div *ngIf="billingLastName!.errors &&
+                     (billingLastName!.hasError('required') || billingLastName!.hasError('notOnlyWhiteSpace'))">
+                  Last Name is requied
+                </div>
+                <div *ngIf="billingLastName!.errors && billingLastName!.hasError('minlength')">
+                  Last Name is must be at least 2 characters long
+                </div>
+
+              </div>
+            </div>
+            <div class="col-md-6 form-group">
+              <label>E-mail</label>
+              <input formControlName="email" class="form-control" type="text" placeholder="example@email.com">
+
+              <div *ngIf="billingEmail!.invalid && (billingEmail!.dirty || billingEmail!.touched)" class="alert alert-danger">
+                <div *ngIf="billingEmail!.errors &&
+                     (billingEmail!.hasError('required') || billingEmail!.hasError('notOnlyWhiteSpace'))">
+                 Email is requied
+                </div>
+                <div *ngIf="billingEmail!.errors && billingEmail!.hasError('pattern')">
+                  Email must be valid email address
+                </div>
+
+              </div>
+
+
+            </div>
+            <div class="col-md-6 form-group">
+              <label>Mobile No</label>
+              <input formControlName="mobile" class="form-control" type="text" placeholder="+123 456 789">
+
+              <div *ngIf="billingMobile!.invalid && (billingMobile!.dirty || billingMobile!.touched)" class="alert alert-danger">
+                <div *ngIf="billingMobile!.errors &&
+                     (billingMobile!.hasError('required') || billingMobile!.hasError('notOnlyWhiteSpace'))">
+                  Mobile is requied
+                </div>
+                <div *ngIf="billingMobile!.errors && billingMobile!.hasError('minlength')">
+                  Mobile is must be at least 2 characters long
+                </div>
+
+              </div>
+
+
+            </div>
+            <div class="col-md-6 form-group">
+              <label>Address Line 1</label>
+              <input formControlName="addressLine1" class="form-control" type="text" placeholder="123 Street">
+
+              <div *ngIf="billingAddressLine1!.invalid && (billingAddressLine1!.dirty || billingAddressLine1!.touched)" class="alert alert-danger">
+                <div *ngIf="billingAddressLine1!.errors &&
+                     (billingAddressLine1!.hasError('required') || billingAddressLine1!.hasError('notOnlyWhiteSpace'))">
+                  Address Line  is requied
+                </div>
+                <div *ngIf="billingAddressLine1!.errors && billingAddressLine1!.hasError('minlength')">
+                  Address Line is must be at least 2 characters long
+                </div>
+
+              </div>
+            </div>
+            <div class="col-md-6 form-group">
+              <label>Address Line 2</label>
+              <input formControlName="addressLine2" class="form-control" type="text" placeholder="123 Street">
+              <div *ngIf="billingAddressLine2!.invalid && (billingAddressLine2!.dirty || billingAddressLine2!.touched)" class="alert alert-danger">
+                <div *ngIf="billingAddressLine2!.errors &&
+                     (billingAddressLine2!.hasError('required') || billingAddressLine2!.hasError('notOnlyWhiteSpace'))">
+                  Address Line 2 is requied
+                </div>
+                <div *ngIf="billingAddressLine2!.errors && billingAddressLine2!.hasError('minlength')">
+                  Address Line 2 is must be at least 2 characters long
+                </div>
+
+              </div>
+            </div>
+            <div class="col-md-6 form-group">
+              <label>Country</label>
+              <select formControlName="country" class="custom-select">
+                <option selected="">United States</option>
+                <option>Afghanistan</option>
+                <option>Albania</option>
+                <option>Algeria</option>
+              </select>
+
+              <div *ngIf="billingCountry!.invalid && (billingCountry!.dirty || billingCountry!.touched)" class="alert alert-danger">
+                <div *ngIf="billingCountry!.errors &&
+                     (billingCountry!.hasError('required') || billingCountry!.hasError('notOnlyWhiteSpace'))">
+                 Country  is requied
+                </div>
+                <div *ngIf="billingCountry!.errors && billingCountry!.hasError('minlength')">
+                  Country is must be at least 2 characters long
+                </div>
+
+              </div>
+            </div>
+            <div class="col-md-6 form-group">
+              <label>City</label>
+              <input formControlName="city" class="form-control" type="text" placeholder="New York">
+
+              <div *ngIf="billingCity!.invalid && (billingCity!.dirty || billingCity!.touched)" class="alert alert-danger">
+                <div *ngIf="billingCity!.errors &&
+                     (billingCity!.hasError('required') || billingCity!.hasError('notOnlyWhiteSpace'))">
+                  City is requied
+                </div>
+                <div *ngIf="billingCity!.errors && billingCity!.hasError('minlength')">
+                  City is must be at least 2 characters long
+                </div>
+
+              </div>
+            </div>
+            <div class="col-md-6 form-group">
+              <label>State</label>
+              <input formControlName="state" class="form-control" type="text" placeholder="New York">
+              <div *ngIf="billingState!.invalid && (billingState!.dirty || billingState!.touched)" class="alert alert-danger">
+                <div *ngIf="billingState!.errors &&
+                     (billingState!.hasError('required') || billingState!.hasError('notOnlyWhiteSpace'))">
+                  State is requied
+                </div>
+                <div *ngIf="billingState!.errors && billingState!.hasError('minlength')">
+                  State is must be at least 2 characters long
+                </div>
+
+              </div>
+            </div>
+            <div class="col-md-6 form-group">
+              <label>ZIP Code</label>
+              <input formControlName="zip" class="form-control" type="text" placeholder="123">
+              <div *ngIf="billingZip!.invalid && (billingZip!.dirty || billingZip!.touched)" class="alert alert-danger">
+                <div *ngIf="billingZip!.errors &&
+                     (billingZip!.hasError('required') || billingZip!.hasError('notOnlyWhiteSpace'))">
+                  Address Line  is requied
+                </div>
+                <div *ngIf="billingZip!.errors && billingZip!.hasError('minlength')">
+                  Address Line is must be at least 2 characters long
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <div formGroupName="customCheckBoxes">
+          <div class="col-md-12 form-group">
+            <div class="custom-control custom-checkbox">
+              <input formControlName="createAccountCheckbox" type="checkbox" class="custom-control-input" id="newaccount">
+              <label class="custom-control-label" for="newaccount">Create an account</label>
+            </div>
+          </div>
+          <div class="col-md-12 form-group">
+            <div class="custom-control custom-checkbox">
+              <input formControlName="shippingAddressCheckbox"  (change)="true" #checkBoxShippingAddress type="checkbox" class="custom-control-input" id="shipto">
+              <label class="custom-control-label" for="shipto" data-toggle="collapse" data-target="#shipping-address">Ship to different address</label>
+            </div>
+          </div>
+        </div>
+
+
+        <div formGroupName="shippingAddress"  class="collapse mb-4" id="shipping-address">
+          <h4 class="font-weight-semi-bold mb-4">Shipping Address</h4>
+          <div class="row" >
+            <div class="col-md-6 form-group">
+              <label>First Name</label>
+              <input formControlName="firstName" class="form-control" type="text" placeholder="John">
+              <div *ngIf="shippingFirstName!.invalid && (shippingFirstName!.dirty || shippingFirstName!.touched)" class="alert alert-danger">
+                <div *ngIf="shippingFirstName!.errors &&
+                     (shippingFirstName!.hasError('required') || shippingFirstName!.hasError('notOnlyWhiteSpace'))">
+                  FirstName is requied
+                </div>
+                <div *ngIf="shippingFirstName!.errors && shippingFirstName!.hasError('minlength')">
+                  FirstName is must be at least 2 characters long
+                </div>
+
+
+              </div>
+
+            </div>
+            <div class="col-md-6 form-group">
+              <label>Last Name</label>
+              <input formControlName="lastName" class="form-control" type="text" placeholder="Doe">
+              <div *ngIf="shippingLastName!.invalid && (shippingLastName!.dirty || shippingLastName!.touched)" class="alert alert-danger">
+                <div *ngIf="shippingLastName!.errors &&
+                     (shippingLastName!.hasError('required') || shippingLastName!.hasError('notOnlyWhiteSpace'))">
+                  Last Name is requied
+                </div>
+                <div *ngIf="shippingLastName!.errors && shippingLastName!.hasError('minlength')">
+                  Last Name is must be at least 2 characters long
+                </div>
+
+
+              </div>
+            </div>
+            <div class="col-md-6 form-group">
+              <label>E-mail</label>
+              <input formControlName="email" class="form-control" type="text" placeholder="example@email.com">
+              <div *ngIf="shippingEmail!.invalid && (shippingEmail!.dirty || shippingEmail!.touched)" class="alert alert-danger">
+                <div *ngIf="shippingEmail!.errors &&
+                     (shippingEmail!.hasError('required') || shippingEmail!.hasError('notOnlyWhiteSpace'))">
+                  Email is requied
+                </div>
+                <div *ngIf="shippingEmail!.errors && shippingEmail!.hasError('pattern')">
+                  Email must be valid email address
+                </div>
+
+              </div>
+            </div>
+            <div class="col-md-6 form-group">
+              <label>Mobile No</label>
+              <input formControlName="mobile" class="form-control" type="text" placeholder="+123 456 789">
+              <div *ngIf="shippingMobile!.invalid && (shippingMobile!.dirty || shippingMobile!.touched)" class="alert alert-danger">
+                <div *ngIf="shippingMobile!.errors &&
+                     (shippingMobile!.hasError('required') || shippingMobile!.hasError('notOnlyWhiteSpace'))">
+                  Mobile is requied
+                </div>
+                <div *ngIf="shippingMobile!.errors && shippingMobile!.hasError('minlength')">
+                  Mobile is must be at least 2 characters long
+                </div>
+
+
+              </div>
+            </div>
+            <div class="col-md-6 form-group">
+              <label>Address Line 1</label>
+              <input formControlName="addressLine1" class="form-control" type="text" placeholder="123 Street">
+              <div *ngIf="shippingAddressLine1!.invalid && (shippingAddressLine1!.dirty || shippingAddressLine1!.touched)" class="alert alert-danger">
+                <div *ngIf="shippingAddressLine1!.errors &&
+                     (shippingAddressLine1!.hasError('required') || shippingAddressLine1!.hasError('notOnlyWhiteSpace'))">
+                  Address Line 1 is requied
+                </div>
+                <div *ngIf="shippingAddressLine1!.errors && shippingAddressLine1!.hasError('minlength')">
+                  Address Line 1 is must be at least 2 characters long
+                </div>
+
+
+              </div>
+            </div>
+            <div class="col-md-6 form-group">
+              <label>Address Line 2</label>
+              <input formControlName="addressLine2" class="form-control" type="text" placeholder="123 Street">
+              <div *ngIf="shippingAddressLine2!.invalid && (shippingAddressLine2!.dirty || shippingAddressLine2!.touched)" class="alert alert-danger">
+                <div *ngIf="shippingAddressLine2!.errors &&
+                     (shippingAddressLine2!.hasError('required') || shippingAddressLine2!.hasError('notOnlyWhiteSpace'))">
+                  Address Line 2 is requied
+                </div>
+                <div *ngIf="shippingAddressLine2!.errors && shippingAddressLine2!.hasError('minlength')">
+                  Address Line 2 is must be at least 2 characters long
+                </div>
+
+
+              </div>
+            </div>
+            <div class="col-md-6 form-group">
+              <label>Country</label>
+              <select formControlName="country" class="custom-select">
+                <option selected="">United States</option>
+                <option>Afghanistan</option>
+                <option>Albania</option>
+                <option>Algeria</option>
+              </select>
+
+              <div *ngIf="shippingAddressLine2!.invalid && (shippingAddressLine2!.dirty || shippingAddressLine2!.touched)" class="alert alert-danger">
+                <div *ngIf="shippingAddressLine2!.errors &&
+                     (shippingAddressLine2!.hasError('required') || shippingAddressLine2!.hasError('notOnlyWhiteSpace'))">
+                  Address Line 2 is requied
+                </div>
+                <div *ngIf="shippingAddressLine2!.errors && shippingAddressLine2!.hasError('minlength')">
+                  Address Line 2 is must be at least 2 characters long
+                </div>
+
+
+              </div>
+            </div>
+            <div class="col-md-6 form-group">
+              <label>City</label>
+              <input formControlName="city" class="form-control" type="text" placeholder="New York">
+              <div *ngIf="shippingCity!.invalid && (shippingCity!.dirty || shippingCity!.touched)" class="alert alert-danger">
+                <div *ngIf="shippingCity!.errors &&
+                     (shippingCity!.hasError('required') || shippingCity!.hasError('notOnlyWhiteSpace'))">
+                  City is requied
+                </div>
+                <div *ngIf="shippingCity!.errors && shippingCity!.hasError('minlength')">
+                  City is must be at least 2 characters long
+                </div>
+
+
+              </div>
+            </div>
+            <div class="col-md-6 form-group">
+              <label>State</label>
+              <input formControlName="state" class="form-control" type="text" placeholder="New York">
+              <div *ngIf="shippingState!.invalid && (shippingState!.dirty || shippingState!.touched)" class="alert alert-danger">
+                <div *ngIf="shippingState!.errors &&
+                     (shippingState!.hasError('required') || shippingState!.hasError('notOnlyWhiteSpace'))">
+                  State is requied
+                </div>
+                <div *ngIf="shippingState!.errors && shippingState!.hasError('minlength')">
+                  State is must be at least 2 characters long
+                </div>
+
+
+              </div>
+
+            </div>
+            <div class="col-md-6 form-group">
+              <label>ZIP Code</label>
+              <input formControlName="zip" class="form-control" type="text" placeholder="123">
+              <div *ngIf="shippingZip!.invalid && (shippingZip!.dirty || shippingZip!.touched)" class="alert alert-danger">
+                <div *ngIf="shippingZip!.errors &&
+                     (shippingZip!.hasError('required') || shippingZip!.hasError('notOnlyWhiteSpace'))">
+                  Zip is requied
+                </div>
+                <div *ngIf="shippingZip!.errors && shippingZip!.hasError('minlength')">
+                  Zip is must be at least 2 characters long
+                </div>
+
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-5 p-0 m-0">
+        <div class="row-6">
+          <div class="card border-secondary">
+            <div class="card-header bg-secondary border-0">
+              <h4 class="font-weight-semi-bold m-0">Order Total</h4>
+            </div>
+            <div class="card-body">
+              <h5 class="font-weight-medium mb-3">Products</h5>
+              <div *ngFor="let cartItem of cartItems" class="d-flex justify-content-between">
+                <p>{{cartItem.name}}</p>
+                <p>{{cartItem.unitPrice | currency:'EUR'}}</p>
+              </div>
+
+              <hr class="mt-0">
+              <div class="d-flex justify-content-between mb-3 pt-1">
+                <h6 class="font-weight-medium">Subtotal</h6>
+                <h6 class="font-weight-medium">{{subTotalPrice | currency:'EUR'}}</h6>
+              </div>
+              <div class="d-flex justify-content-between">
+                <h6 class="font-weight-medium">Shipping</h6>
+                <h6 class="font-weight-medium">{{shipping | currency:'EUR'}}</h6>
+              </div>
+            </div>
+            <div class="card-footer border-secondary bg-transparent">
+              <div class="d-flex justify-content-between mt-2">
+                <h5 class="font-weight-bold">Total</h5>
+                <h5 class="font-weight-bold">{{totalPrice | currency:'EUR'}}</h5>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row-6">
+          <div class="card border-secondary mb-5">
+            <div class="card-header bg-secondary border-0">
+              <h4 class="font-weight-semi-bold m-0">Payment</h4>
+            </div>
+            <div class="card-body">
+              <div class="form-group">
+                <div class="custom-control custom-radio">
+                  <input type="radio" class="custom-control-input" name="payment" id="paypal">
+                  <label class="custom-control-label" for="paypal">Paypal</label>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="custom-control custom-radio">
+                  <input type="radio" class="custom-control-input" name="payment" id="directcheck">
+                  <label class="custom-control-label" for="directcheck">Direct Check</label>
+                </div>
+              </div>
+              <div class="">
+                <div class="custom-control custom-radio">
+                  <input type="radio" class="custom-control-input" name="payment" id="banktransfer">
+                  <label class="custom-control-label" for="banktransfer">Bank Transfer</label>
+                </div>
+              </div>
+            </div>
+            <div class="card-footer border-secondary bg-transparent">
+              <button (click)="onSubmit()" class="btn btn-lg btn-block btn-primary font-weight-bold my-3 py-3">Place Order</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+    </div>
+</div>

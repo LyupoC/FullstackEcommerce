@@ -1,0 +1,13 @@
+<div class="input-group">
+  <input #myInput type="text"
+         class="form-control"
+         style="border:solid 2px #7FAD39;"
+         (keyup.enter)="doSearch(myInput.value)"
+         placeholder="Search for products">
+
+  <div class="input-group-append">
+    <span class="input-group-text bg-transparent m-0 p-0">
+      <a (click)="doSearch(myInput.value)" class="btn btn-light m-0 ml-1">SEARCH</a>
+    </span>
+  </div>
+</div>
