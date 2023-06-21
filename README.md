@@ -1,6 +1,6 @@
 # Ecommerce Website
 
-live version of progress:
+[Click Here for Live version of the site](https://lyupoc.github.io/AnguEcomFront)
 
 plan:
 
