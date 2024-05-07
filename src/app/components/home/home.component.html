@@ -73,7 +73,7 @@
     </div>
     <div class="row px-xl-5 pb-3">
       <div class="col-lg-3 col-md-6 col-sm-12 pb-1" *ngFor="let newProduct of newest">
-        <div class="card product-item border-0 mb-4" >
+        <div class="card product-item border-0 mb-4"  (click)="navigateToProductDetail($event, newProduct)" >
           <div class="card-header product-img d-flex justify-content-center align-items-end overflow-hidden bg-transparent border p-0">
             <img class="img-fluid w-50" src="{{newProduct.imageUrl}}" alt="">
           </div>
@@ -146,7 +146,7 @@
     </div>
     <div class="row px-xl-5 pb-3  ">
       <div class="col-lg-3 col-md-6 col-sm-12 pb-1  " *ngFor="let highestRatedProduct of highestRated">
-        <div class="card product-item border-0 mb-4">
+        <div class="card product-item border-0 mb-4"  (click)="navigateToProductDetail($event, highestRatedProduct)" >
           <div class="card-header product-img d-flex justify-content-center align-items-end overflow-hidden bg-transparent border p-0">
             <img class="img-fluid w-50" src="{{highestRatedProduct.imageUrl}}" alt="">
           </div>

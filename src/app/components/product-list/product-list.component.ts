@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CartItem } from '../../common/cart-item';
 import { Product } from '../../common/product';
 import { CartService } from '../../services/cart.service';
@@ -35,9 +35,10 @@ export class ProductListComponent implements OnInit {
 
   constructor(private productService: ProductService,
               private route: ActivatedRoute,
+              private router: Router,
               private cartService: CartService,
               private dialogService: ModalDialogsService,
-              public dialog: MatDialog) { }
+    public dialog: MatDialog) { }
 
   ngOnInit(): void {
 
@@ -103,6 +104,15 @@ export class ProductListComponent implements OnInit {
 
     this.cartService.addToCart(new CartItem(theProduct));
     this.dialogService.openAddedToCartDialog('0ms', '5ms', theProduct);
+  }
+
+  navigateToProductDetail(event:MouseEvent, theProduct: Product) {
+
+    const onClickedElement = event.target as HTMLElement;
+
+    if (onClickedElement.tagName != 'A' && onClickedElement.parentElement?.tagName != 'A') {
+      this.router.navigate(['/products', theProduct.id]);
+    }
   }
 
 
