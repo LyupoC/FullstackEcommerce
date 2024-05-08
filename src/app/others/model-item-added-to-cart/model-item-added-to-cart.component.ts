@@ -13,10 +13,12 @@ import { Product } from '../../common/product';
 })
 export class ModelItemAddedToCartComponent implements OnInit {
   product: Product | undefined;
+  count: number = 1;
   constructor(public dialogRef: MatDialogRef<ModelItemAddedToCartComponent>, @Inject(MAT_DIALOG_DATA) public data: any) { }
 
   ngOnInit(): void {
     this.product = this.data.product;
+    this.count = this.data.count;
     
   }
 

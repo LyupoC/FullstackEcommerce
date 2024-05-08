@@ -26,7 +26,9 @@ import { ModalOrderTrackingNumberComponent } from './others/modal-order-tracking
 
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ModalLoadingComponent } from './others/modal-loading/modal-loading.component';
+import { ProductDetailsComponent } from './components/product-details/product-details.component';
 
+import { CarouselModule } from 'ngx-owl-carousel-o';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -36,6 +38,7 @@ const routes: Routes = [
   { path: 'category/:id', component: ProductListComponent },
   { path: 'category', component: ProductListComponent },
   { path: 'products', component: ProductListComponent },
+  { path: 'products/:id', component: ProductDetailsComponent },
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: '**', redirectTo: '/products', pathMatch: 'full' },
 
@@ -57,7 +60,8 @@ const routes: Routes = [
     HomeComponent,
     ProductDetailComponent,
     ModalOrderTrackingNumberComponent,
-    ModalLoadingComponent ],
+    ModalLoadingComponent,
+    ProductDetailsComponent ],
   imports: [
     BrowserModule,
     HttpClientModule,
@@ -65,7 +69,8 @@ const routes: Routes = [
     ReactiveFormsModule,
     MatDialogModule,
     BrowserAnimationsModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    CarouselModule
 
   ],
 

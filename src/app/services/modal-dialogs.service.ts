@@ -28,13 +28,14 @@ export class ModalDialogsService {
     this.loadingModalDialog?.close();
   }
 
-  openAddedToCartDialog(enterAnimationDuration: string, exitAnimationDuration: string, product: Product): void {
+  openAddedToCartDialog(enterAnimationDuration: string, exitAnimationDuration: string, product: Product, count:number = 1): void {
     this.dialog.open(ModelItemAddedToCartComponent, {
       width: '450px',
       enterAnimationDuration,
       exitAnimationDuration,
       data: {
-        "product": product
+        "product": product,
+        "count" : count
       }
     });
   }
