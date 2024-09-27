@@ -17,11 +17,15 @@ export class ModalDialogsService {
 
 
   openLoadingDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
+
+    this.closeLoadingDialog();
+
     this.loadingModalDialog = this.dialog.open(ModalLoadingComponent, {
 
       enterAnimationDuration,
       exitAnimationDuration
     });
+
   }
 
   closeLoadingDialog() {
@@ -46,7 +50,7 @@ export class ModalDialogsService {
       exitAnimationDuration,
       data: {
         "trackingNumber": trackingNumber
-      }
+      } 
     });
 
   }

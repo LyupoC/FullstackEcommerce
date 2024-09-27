@@ -26,6 +26,7 @@
   --warning: #ffc107;
   --danger: #dc3545;
   --light: #FFFFFF;
+  --light-grey: #868686;
   --dark: #1C1C1C;
   --breakpoint-xs: 0;
   --breakpoint-sm: 576px;
@@ -9792,3 +9793,63 @@ a.text-dark:hover, a.text-dark:focus {
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+
+
+
+
+
+
+.custom-slider .ngx-slider .ngx-slider-bar {
+  background: var(--secondary);
+  height: 2px;
+}
+
+.custom-slider .ngx-slider .ngx-slider-selection {
+  background: var(--light-grey);
+}
+
+.custom-slider .ngx-slider .ngx-slider-pointer {
+  width: 11px;
+  height: 16px;
+  top: auto; /* to remove the default positioning */
+  bottom: 0;
+  background-color: var(--primary);
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+}
+
+  .custom-slider .ngx-slider .ngx-slider-pointer:after {
+    display: none;
+  }
+
+.custom-slider .ngx-slider .ngx-slider-bubble {
+  bottom: 14px;
+}
+
+  .custom-slider .ngx-slider .ngx-slider-bubble.ngx-slider-limit {
+    font-weight: bold;
+    color: var(--primary);
+  }
+
+.custom-slider .ngx-slider .ngx-slider-tick {
+  width: 1px;
+  height: 10px;
+  margin-left: 4px;
+  border-radius: 0;
+  background: #ffe4d1;
+  top: -1px;
+}
+
+  .custom-slider .ngx-slider .ngx-slider-tick.ngx-slider-selected {
+    background: var(--primary);
+  }
+
+.custom-slider input {
+
+  float:right;
+
+}
+
+

@@ -14,7 +14,7 @@ import { PaginationComponent } from './components/product-list/pagination/pagina
 import { CartStatusComponent } from './components/cart-status/cart-status.component';
 import { CartDetailsComponent } from './components/cart-details/cart-details.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ModelItemAddedToCartComponent } from './others/model-item-added-to-cart/model-item-added-to-cart.component';
 import { MatDialogModule } from '@angular/material/dialog';
 
@@ -26,6 +26,9 @@ import { ModalOrderTrackingNumberComponent } from './others/modal-order-tracking
 
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ModalLoadingComponent } from './others/modal-loading/modal-loading.component';
+
+
+import { NgxSliderModule } from '@angular-slider/ngx-slider';
 
 
 const routes: Routes = [
@@ -65,8 +68,9 @@ const routes: Routes = [
     ReactiveFormsModule,
     MatDialogModule,
     BrowserAnimationsModule,
-    MatProgressSpinnerModule
-
+    MatProgressSpinnerModule,
+    NgxSliderModule,
+    FormsModule
   ],
 
   providers: [],
