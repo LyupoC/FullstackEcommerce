@@ -6,6 +6,7 @@ import { ModelItemAddedToCartComponent } from '../../others/model-item-added-to-
 import { CartService } from '../../services/cart.service';
 import { ModalDialogsService } from '../../services/modal-dialogs.service';
 import { ProductService } from '../../services/product.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -21,7 +22,8 @@ export class HomeComponent implements OnInit {
 
   constructor(private productService: ProductService, private cartService: CartService,
     private dialogService: ModalDialogsService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -36,7 +38,15 @@ export class HomeComponent implements OnInit {
   addToCart(theProduct: Product) {
 
     this.cartService.addToCart(new CartItem(theProduct));
-    this.dialogService.openAddedToCartDialog('0ms', '5ms', theProduct); 
+    this.dialogService.openAddedToCartDialog('0ms', '5ms', theProduct);
   }
 
+  navigateToProductDetail(event: MouseEvent, theProduct: Product) {
+
+    const onClickedElement = event.target as HTMLElement;
+
+    if (onClickedElement.tagName != 'A' &&  onClickedElement.parentElement?.tagName != 'A') {
+      this.router.navigate(['/products', theProduct.id]);
+    }
+  }
 }

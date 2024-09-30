@@ -1,38 +1,42 @@
 
-<div class="container-fluid bg-secondary mb-5">
-  <div class="row justify-content-center mx-0 mb-0 pb-0">
-    <div class="col-lg-3 container-fluid m-0 p-0" style="min-width:58%;">
-      <div id="header-carousel" class="carousel slide container-fluid" data-ride="carousel">
+<div class="container-lg mb-5">
+  <div class="row mx-0 mb-0 pb-0">
+    <div class="container-lg m-0 p-0 bg-transparent">
+      <div id="header-carousel" class="carousel slide container-lg bg-transparent" data-ride="carousel">
         <div class="carousel-inner ">
-          <div class="carousel-item active " style="height: 600px;">
-            <img class="img-fluid" src="assets/img/freshFoodFlipped.png?" alt="Image">
-            <div class="carousel-caption d-flex flex-column align-items-start justify-content-start">
-              <div class="p-3" style="max-width: 550px;">
-                <h4 class="text-uppercase font-weight-medium mb-3">10% Off Your First Order</h4>
-                <h4 class="" style="font-size:2.5rem;">Organic Vegetables. </h4>
-                <h4 class=" mb-4" style="font-size:2.5rem;">Eat Organic. Be organic.</h4>
-                <a href="" class="btn btn-light py-2 px-3 mt-4 font-weight-bold">View More</a>
+          <div class="carousel-item active  justify-content-center" >
+            <div class="row align-items-center" >
+              <div class="col-lg-6 " >
+                <img class=""  src="assets/img/carouselImage.png" alt="..." />
+              </div>
+              <div class="col-lg-6 ">
+                <small class="p-0 mb-0">DISCOUNT ON FIRST ORDER</small>
+                <h1 class="p-0 m-0">Organic Food</h1>
+                <h1 class="p-0 m-0 font-weight-bold">NaturalCuisine</h1>
+
+                <button class="btn btn-secondary mt-2 rounded box-shadow">Shop Now</button>
+                <button class="btn btn-primary ml-2 mt-2 rounded box-shadow">View More</button>
               </div>
             </div>
           </div>
         </div>
-        <a class="carousel-control-prev" href="#header-carousel" data-slide="prev">
-          <div class="btn btn-dark" style="width: 45px; height: 45px;">
-            <span class="carousel-control-prev-icon mb-n2"></span>
-          </div>
-        </a>
-        <a class="carousel-control-next" href="#header-carousel" data-slide="next">
-          <div class="btn btn-dark" style="width: 45px; height: 45px;">
-            <span class="carousel-control-next-icon mb-n2"></span>
-          </div>
-        </a>
+            <!-- <a class="carousel-control-prev" href="#header-carousel" data-slide="prev">
+         <div class="btn btn-dark" style="width: 45px; height: 45px;">
+           <span class="carousel-control-prev-icon mb-n2"></span>
+         </div>
+       </a>
+       <a class="carousel-control-next" href="#header-carousel" data-slide="next">
+         <div class="btn btn-dark" style="width: 45px; height: 45px;">
+           <span class="carousel-control-next-icon mb-n2"></span>
+         </div>
+       </a>-->
       </div>
     </div>
   </div>
  </div>
 
-  <div class="container mt-5">
-    <div class="row px-xl-5 pb-3">
+  <div class="container mt-5 ">
+    <div class="row px-xl-5 pb-3 justify-content-center ">
       <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
         <div class="d-flex align-items-center border " style="padding: 30px;">
           <h1 class="fa fa-check text-primary m-0 mr-3"></h1>
@@ -48,7 +52,7 @@
       <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
         <div class="d-flex align-items-center border " style="padding: 30px;">
           <h1 class="fas fa-exchange-alt text-primary m-0 mr-3"></h1>
-          <h5 class="font-weight-semi-bold m-0">14-Day Return</h5>
+          <h5 class="font-weight-semi-bold m-0">3-Day Return</h5>
         </div>
       </div>
       <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
@@ -63,34 +67,34 @@
 
   <!-- Featured End -->
   <!-- Categories Start -->
-  <div class="container  pt-5 p-5" style="min-width:67%;">
+  <div class="container  pt-5 p-5" >
     <div class="text-center mb-4">
       <h2 class="section-title px-5"><span class="px-2">New Products</span></h2>
     </div>
     <div class="row px-xl-5 pb-3">
       <div class="col-lg-3 col-md-6 col-sm-12 pb-1" *ngFor="let newProduct of newest">
-        <div class="card product-item border-0 mb-4">
+        <div class="card product-item border-0 mb-4"  (click)="navigateToProductDetail($event, newProduct)" >
           <div class="card-header product-img d-flex justify-content-center align-items-end overflow-hidden bg-transparent border p-0">
             <img class="img-fluid w-50" src="{{newProduct.imageUrl}}" alt="">
           </div>
           <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
             <h6 class="text-truncate mb-3">{{newProduct.name}}</h6>
+          </div>
+          <div class="card-footer d-flex justify-content-between align-items-center bg-light border">
             <div class="d-flex justify-content-center">
-              <h6>{{newProduct.unitPrice}}</h6><h6 class="text-muted ml-2"><del>{{newProduct.unitPrice}}</del></h6>
+              <h6 class="p-0 m-0">$ {{newProduct.unitPrice}}</h6><h6 class="text-muted p-0 m-0 ml-2"><del>{{newProduct.unitPrice}}</del></h6>
+            </div>
+              <a href="javascript:void(0);" class="btn  px-3 py-0 text-dark " (click)="addToCart(newProduct)"><i class="fas fa-shopping-cart text-primary  mr-2 p-0"></i>Add </a>
             </div>
           </div>
-          <div class="card-footer d-flex justify-content-between bg-light border">
-            <a href="" class="btn btn-sm text-dark p-0"><i class="fas fa-eye text-primary mr-1"></i>View Detail</a>
-            <a href="javascript:void(0);" class="btn btn-sm text-dark p-0" (click)="addToCart(newProduct)"><i class="fas fa-shopping-cart text-primary mr-1"></i>Add To Cart</a>
-          </div>
-        </div>
       </div>
     </div>
   </div>
+
   <!-- Products End -->
   <!-- Categories End -->
   <!-- Offer Start -->
-  <div class="container offer pt-5" style="min-width:65%;">
+  <div class="container offer pt-5" >
     <div class="row px-xl-5">
       <div class="col-md-6 pb-4">
         <div class="position-relative text-center text-md-right text-white mb-2 py-5 px-5 bg-primary">
@@ -136,31 +140,33 @@
   </div>
   <!-- Subscribe End -->
   <!-- Products Start -->
-  <div class="container  pt-5 p-5" style="min-width:67%;">
+  <div class="container  pt-5 p-5" >
     <div class="text-center mb-4">
       <h2 class="section-title px-5"><span class="px-2">Highest rated</span></h2>
     </div>
-    <div class="row px-xl-5 pb-3">
-      <div class="col-lg-3 col-md-6 col-sm-12 pb-1"  *ngFor="let highestRatedProduct of highestRated">
-        <div class="card product-item border-0 mb-4">
+    <div class="row px-xl-5 pb-3  ">
+      <div class="col-lg-3 col-md-6 col-sm-12 pb-1  " *ngFor="let highestRatedProduct of highestRated">
+        <div class="card product-item border-0 mb-4"  (click)="navigateToProductDetail($event, highestRatedProduct)" >
           <div class="card-header product-img d-flex justify-content-center align-items-end overflow-hidden bg-transparent border p-0">
-            <img class="img-fluid w-50  " src="{{highestRatedProduct.imageUrl}}" alt="">
+            <img class="img-fluid w-50" src="{{highestRatedProduct.imageUrl}}" alt="">
           </div>
           <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
             <h6 class="text-truncate mb-3">{{highestRatedProduct.name}}</h6>
-            <div class="d-flex justify-content-center">
-              <h6>{{highestRatedProduct.unitPrice}}</h6><h6 class="text-muted ml-2"><del>{{highestRatedProduct.unitPrice}}</del></h6>
-            </div>
           </div>
-          <div class="card-footer d-flex justify-content-between bg-light border">
-            <a href="" class="btn btn-sm text-dark p-0"><i class="fas fa-eye text-primary mr-1"></i>View Detail</a>
-            <a href="javascript:void(0);" class="btn btn-sm text-dark p-0" (click)="addToCart(highestRatedProduct)"><i class="fas fa-shopping-cart text-primary mr-1"></i>Add To Cart</a>
+          <div class="card-footer d-flex justify-content-between align-items-center bg-light border">
+            <div class="d-flex justify-content-center">
+              <h6 class="p-0 m-0">$ {{highestRatedProduct.unitPrice}}</h6><h6 class="text-muted p-0 m-0 ml-2"><del>{{highestRatedProduct.unitPrice}}</del></h6>
+            </div>
+            <a href="javascript:void(0);" class="btn  px-3 py-0 text-dark " (click)="addToCart(highestRatedProduct)"><i class="fas fa-shopping-cart text-primary  mr-2 p-0"></i>Add </a>
           </div>
         </div>
+
+
+      </div>
       </div>
      
     </div>
-  </div>
+
   <!-- Products End -->
   <!-- Vendor Start -->
 

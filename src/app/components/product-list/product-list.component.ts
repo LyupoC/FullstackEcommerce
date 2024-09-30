@@ -1,5 +1,7 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CartItem } from '../../common/cart-item';
 import { Product } from '../../common/product';
 import { CartService } from '../../services/cart.service';
@@ -162,6 +164,15 @@ export class ProductListComponent implements OnInit, AfterViewInit {
   }
 
   private updateCheckboxDataCounts(productFlags: Record<string, number>) {
+  navigateToProductDetail(event:MouseEvent, theProduct: Product) {
+
+    const onClickedElement = event.target as HTMLElement;
+
+    if (onClickedElement.tagName != 'A' && onClickedElement.parentElement?.tagName != 'A') {
+      this.router.navigate(['/products', theProduct.id]);
+    }
+  }
+
 
     this.checkboxDataCounts = Object.entries(productFlags).map(([key, value]) => {
       const flagNames: Record<string, string> = {
