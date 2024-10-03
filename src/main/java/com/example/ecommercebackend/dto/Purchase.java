@@ -14,9 +14,7 @@ public class Purchase {
     private Customer customer;
     private Address shippingAddress;
     private Address billingAddress;
-
     private Order order;
-
     private ArrayList<OrderItem> orderItems;
 
 

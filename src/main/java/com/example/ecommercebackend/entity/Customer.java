@@ -28,7 +28,7 @@ public class Customer {
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
     private List<Order> orders = new ArrayList<>();
 
-    public void add(Order order){
+    public void addOrder(Order order){
 
         if(order == null){
             return;
