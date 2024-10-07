@@ -20,7 +20,6 @@ import { MatDialogModule } from '@angular/material/dialog';
 
 import { BrowserAnimationsModule  } from '@angular/platform-browser/animations';
 import { HomeComponent } from './components/home/home.component';
-import { ProductDetailComponent } from './components/product-detail/product-detail.component';
 import { ModalOrderTrackingNumberComponent } from './others/modal-order-tracking-number/modal-order-tracking-number.component';
 
 
@@ -31,6 +30,7 @@ import { ProductDetailsComponent } from './components/product-details/product-de
 import { CarouselModule } from 'ngx-owl-carousel-o';
 
 import { NgxSliderModule } from '@angular-slider/ngx-slider';
+import { OrderHistoryComponent } from './components/order-history/order-history.component';
 
 
 const routes: Routes = [
@@ -41,6 +41,7 @@ const routes: Routes = [
   { path: 'category/:id', component: ProductListComponent },
   { path: 'category', component: ProductListComponent },
   { path: 'products', component: ProductListComponent },
+  { path: 'orders', component: OrderHistoryComponent },
   { path: 'products/:id', component: ProductDetailsComponent },
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: '**', redirectTo: '/products', pathMatch: 'full' },
@@ -61,10 +62,10 @@ const routes: Routes = [
     CheckoutComponent,
     ModelItemAddedToCartComponent,
     HomeComponent,
-    ProductDetailComponent,
     ModalOrderTrackingNumberComponent,
     ModalLoadingComponent,
-    ProductDetailsComponent ],
+    ProductDetailsComponent,
+    OrderHistoryComponent ],
   imports: [
     BrowserModule,
     HttpClientModule,
@@ -74,8 +75,7 @@ const routes: Routes = [
     BrowserAnimationsModule,
     MatProgressSpinnerModule,
     NgxSliderModule,
-    FormsModule
-    MatProgressSpinnerModule,
+    FormsModule,
     CarouselModule
 
   ],

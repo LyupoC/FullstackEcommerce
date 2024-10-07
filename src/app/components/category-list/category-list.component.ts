@@ -17,15 +17,13 @@ export class CategoryListComponent implements OnInit {
 
   constructor(private productCategoryService: ProductService, private router: Router) {
 
- 
-      // Subscribe to router events to close the dropdown menu on route change
-      this.router.events.subscribe(event => {
-        if (event instanceof NavigationEnd) {
-          this.isDropdownOpen = false;
-        }
-      });
-    }
-
+    // Subscribe to router events to close the dropdown menu on route change
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        this.isDropdownOpen = false;
+      }
+    });
+  }
 
 
   ngOnInit(): void {
@@ -40,7 +38,7 @@ export class CategoryListComponent implements OnInit {
 
     });
   }
-  toggleNavbar(){
+  toggleNavbar() {
     this.isDropdownOpen = !this.isDropdownOpen;
   }
 

@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 })
 export class CheckoutService {
 
-  private baseUrl: string = 'https://backend-web-service-ecom.onrender.com/api/checkout/purchase';
+  private baseUrl: string = 'http://localhost:8080/api/checkout/purchase'; //'https://backend-web-service-ecom.onrender.com/api/checkout/purchase';
   constructor(private httpClient: HttpClient) { }
 
   purchase(purchase: Purchase): Observable<any> {
