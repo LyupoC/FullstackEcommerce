@@ -45,7 +45,8 @@ export class HomeComponent implements OnInit {
 
     const onClickedElement = event.target as HTMLElement;
 
-    if (onClickedElement.tagName != 'A' &&  onClickedElement.parentElement?.tagName != 'A') {
+    //make sure that it does not anvigate if add to Cart is pressed
+    if (onClickedElement.tagName != 'A' && onClickedElement.parentElement?.tagName != 'A') {
       this.router.navigate(['/products', theProduct.id]);
     }
   }

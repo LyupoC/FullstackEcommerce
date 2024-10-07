@@ -1,6 +1,4 @@
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CartItem } from '../../common/cart-item';
 import { Product } from '../../common/product';
@@ -18,7 +16,7 @@ import { ModalDialogsService } from '../../services/modal-dialogs.service';
   templateUrl: './product-list-grid.component.html',
   styleUrls: ['./product-list.component.css'],
 })
-export class ProductListComponent implements OnInit, AfterViewInit {
+export class ProductListComponent implements OnInit, AfterViewInit, OnDestroy {
   products: Product[] = [];
   productCountsPerFlag: Record<string, number> = {};
   currentCategoryId: number = 1;
@@ -44,6 +42,7 @@ export class ProductListComponent implements OnInit, AfterViewInit {
     private searchService: SearchService,
     private productService: ProductService,
     private route: ActivatedRoute,
+    private router: Router,
     private cartService: CartService,
     private dialogService: ModalDialogsService,
     public dialog: MatDialog,
@@ -60,6 +59,8 @@ export class ProductListComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     this.subscriptions.add(this.searchService.keyword$.subscribe(keyword => {
       this.keyWords = keyword;
+      this.pageNumber = 1;
+
       this.listProducts();
     }));
 
@@ -97,15 +98,26 @@ export class ProductListComponent implements OnInit, AfterViewInit {
 
   handleListProducts() {
     const hasCategoryId = this.route.snapshot.paramMap.has('id');
+
     if (hasCategoryId) {
+
       this.currentCategoryId = +this.route.snapshot.paramMap.get('id')!;
       if (this.currentCategoryId !== this.previousCategoryId) {
+
+        const keyWordPresent = this.keyWords !== '';
+
+        if (keyWordPresent) {
+          this.searchService.clearKeyword();
+        }
+
         this.pageNumber = 1;
         this.resetForm();
       }
+
       this.previousCategoryId = this.currentCategoryId;
+
     } else {
-      this.currentCategoryId = 1;
+      this.currentCategoryId = 0;
     }
 
     this.filterPriceRange();
@@ -116,6 +128,9 @@ export class ProductListComponent implements OnInit, AfterViewInit {
     this.highValue = 60;
     this.checkboxForm.reset();
     this.filterButtonPressed = false;
+
+ 
+    
   }
 
   addToCart(theProduct: Product) {
@@ -163,16 +178,19 @@ export class ProductListComponent implements OnInit, AfterViewInit {
     return { value, highValue, inStock, inOnSale, isLimited, isStaffRecommended };
   }
 
-  private updateCheckboxDataCounts(productFlags: Record<string, number>) {
-  navigateToProductDetail(event:MouseEvent, theProduct: Product) {
+
+
+  navigateToProductDetail(event: MouseEvent, theProduct: Product) {
 
     const onClickedElement = event.target as HTMLElement;
 
+    //make sure that it does not anvigate if add to Cart is pressed
     if (onClickedElement.tagName != 'A' && onClickedElement.parentElement?.tagName != 'A') {
       this.router.navigate(['/products', theProduct.id]);
     }
   }
 
+  private updateCheckboxDataCounts(productFlags: Record<string, number>) {
 
     this.checkboxDataCounts = Object.entries(productFlags).map(([key, value]) => {
       const flagNames: Record<string, string> = {
@@ -185,4 +203,9 @@ export class ProductListComponent implements OnInit, AfterViewInit {
       return { flag: flagNames[key] || key, counts: value };
     });
   }
+
+  ngOnDestroy() {
+    this.subscriptions.unsubscribe(); 
+  }
 }
+

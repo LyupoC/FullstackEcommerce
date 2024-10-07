@@ -10,12 +10,12 @@ import { SearchService } from '../../services/search.service';
 export class SearchComponent implements OnInit {
   searchKeyword: string = '';
 
-
-
   constructor(private searchService: SearchService, private route: ActivatedRoute, private router: Router) { }
-  ngOnInit(): void {
 
-    
+  ngOnInit(): void {
+    this.searchService.keyword$.subscribe(keyword => {
+      this.searchKeyword = keyword;
+    });
   }
 
   doSearch(value: string) {
@@ -38,7 +38,7 @@ export class SearchComponent implements OnInit {
   }
 
   clearSearch() {
-    this.searchKeyword = ''; // Clear the input field
+    //this.searchKeyword = ''; // Clear the input field
     this.searchService.clearKeyword(); // Clear from local storage
   }
 }

@@ -1,7 +1,7 @@
 
 
 <div class="d-flex  ">
-  <div class="collapse p-0 m-0 rounded custom-collapse " id="collapseExample">
+  <div [ngClass]="{'active': isSearchVisible}" class="search-container p-0 m-0 rounded ">
     <div class="">
       <input #myInput type="text"
              class="form-control mt-1 rounded"
@@ -30,6 +30,7 @@
   const collapseExample = document.getElementById('collapseExample');
 
   collapseInput.addEventListener('input', function () {
+    console.log(collapseInput);
     if (this.value.trim() !== '') {
       collapseExample.classList.remove('collapsing');
       collapseExample.classList.add('show');

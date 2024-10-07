@@ -60,14 +60,14 @@ export class ProductService {
     return this.searchProducts(searchUrl);
   }
 
-  getProductsPaginate(page:number, pageSize:number, categoryId: number) : Observable<GetResponseProducts>{
-     const searchUrl = `${this.baseUrl}/search/findByCategoryId?id=${categoryId}&page=${page}&size=${pageSize}`;
-     return this.httpClient.get<GetResponseProducts>(searchUrl);
+  getProductsPaginate(page: number, pageSize: number, categoryId: number): Observable<GetResponseProducts> {
+    const searchUrl = `${this.baseUrl}/search/findByCategoryId?id=${categoryId}&page=${page}&size=${pageSize}`;
+    return this.httpClient.get<GetResponseProducts>(searchUrl);
   }
 
 
-  getProductsFilterPaginate(page: number, pageSize: number, categoryId: number | null, minPrice: number, maxPrice: number, inStock: boolean, inOnSale: boolean, isLimited: boolean, isStaffRecommended: boolean, sortBy: string | null, keyWords : string = ""): Observable<GetResponseProducts> {
-    
+  getProductsFilterPaginate(page: number, pageSize: number, categoryId: number | null, minPrice: number, maxPrice: number, inStock: boolean, inOnSale: boolean, isLimited: boolean, isStaffRecommended: boolean, sortBy: string | null, keyWords: string = ""): Observable<GetResponseProducts> {
+
 
     const queryParams: string[] = [
       `page=${page}`,
@@ -81,17 +81,17 @@ export class ProductService {
     ];
 
 
-      if (categoryId !== null) {
-        queryParams.push(`category=${categoryId}`);
-      }
+    if (categoryId !== null) {
+      queryParams.push(`category=${categoryId}`);
+    }
 
-      if (sortBy != null) {
-        queryParams.push(`sortBy=${sortBy}`);
-      }
+    if (sortBy != null) {
+      queryParams.push(`sortBy=${sortBy}`);
+    }
 
-      if (keyWords) {
-        queryParams.push(`keyWords=${keyWords}`);
-      }
+    if (keyWords) {
+      queryParams.push(`keyWords=${keyWords}`);
+    }
 
     const searchUrl = `${this.baseUrl}/search?${queryParams.join('&')}`;
 
@@ -108,16 +108,16 @@ interface GetResponseProducts {
   }
 
   productFlags: {
-    inStockCount:number,
-    limitedCount:number,
-    onSaleCount:number,
-    staffRecommendedCount:number
+    inStockCount: number,
+    limitedCount: number,
+    onSaleCount: number,
+    staffRecommendedCount: number
   }
 
-  page:{
-    size:number,
-    totalElements:number,
-    totalPages:number,
+  page: {
+    size: number,
+    totalElements: number,
+    totalPages: number,
     number: number
   }
 }
