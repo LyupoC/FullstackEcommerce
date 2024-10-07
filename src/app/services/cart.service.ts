@@ -1,36 +1,80 @@
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 import { CartItem } from '../common/cart-item';
-import { Product } from '../common/product';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class CartService {
 
+  private cartItemsKey = 'cartItems';
+  private totalPriceKey = 'totalPrice';
+  private totalQuantityKey = 'totalQuantity';
+
   cartItems: CartItem[] = [];
 
-  totalPrice: Subject<number> = new Subject<number>();
-  totalQuantity: Subject<number> = new Subject<number>();
+  totalPrice: BehaviorSubject<number> = new BehaviorSubject<number>(0);
+  totalQuantity: BehaviorSubject<number> = new BehaviorSubject<number>(0);
 
-  constructor() { }
+  constructor() {
+    this.loadCartFromStorage();
+
+  }
+
+  private loadCartFromStorage(): void {
+    const items = localStorage.getItem(this.cartItemsKey);
+    const totalPrice = localStorage.getItem(this.totalPriceKey);
+    const totalQuantity = localStorage.getItem(this.totalQuantityKey);
+
+    // Load cart items
+    if (items) {
+      try {
+        this.cartItems = JSON.parse(items);
+        if (!Array.isArray(this.cartItems)) {
+          this.cartItems = []; // Reset to empty array if invalid
+        }
+      } catch {
+        this.cartItems = []; // Reset to empty array on parse error
+      }
+    }
+
+    // Load total price
+    if (totalPrice) {
+      const parsedPrice = parseFloat(totalPrice);
+      if (!isNaN(parsedPrice)) {
+        this.totalPrice.next(parsedPrice);
+      }
+    }
+
+    // Load total quantity
+    if (totalQuantity) {
+      const parsedQuantity = parseInt(totalQuantity, 10);
+      if (!isNaN(parsedQuantity)) {
+        this.totalQuantity.next(parsedQuantity);
+      }
+    }
+  }
+
+  saveCart(items: CartItem[], totalPrice: number, totalQuantity: number): void {
+    localStorage.setItem(this.cartItemsKey, JSON.stringify(items));
+    localStorage.setItem(this.totalPriceKey, totalPrice.toString());
+    localStorage.setItem(this.totalQuantityKey, totalQuantity.toString());
+  }
+
+
+  clearCartStorage(): void {
+    localStorage.removeItem(this.cartItemsKey);
+    localStorage.removeItem(this.totalPriceKey);
+    localStorage.removeItem(this.totalQuantityKey);
+  }
 
   addToCart(cartItem: CartItem) {
 
+    const existingCartItem = this.cartItems.find(item => item.id === cartItem.id);
 
-    let alreadyExistsInCart: boolean = false;
-    let existingCartItem: CartItem | undefined = undefined;
-
-
-    if (this.cartItems.length > 0) {
-
-      existingCartItem = this.cartItems.find(item => item.id === cartItem.id);
-      alreadyExistsInCart = (existingCartItem != undefined);
-
-    }
-
-    if (alreadyExistsInCart) {
-        existingCartItem!.quantity++;
+    if (existingCartItem) {
+        existingCartItem.quantity++;
 
     } else {
 
@@ -38,7 +82,7 @@ export class CartService {
 
     }
 
-    this.computeCartTotals();
+    this.updateCart();
 
   }
 
@@ -54,17 +98,19 @@ export class CartService {
 
     }
 
-
     this.totalPrice.next(totalPriceValue);
     this.totalQuantity.next(totalQuantityValue);
 
   }
 
-  empty() {
+  clearCart() {
+
     this.cartItems = [];
     this.computeCartTotals();
+    this.clearCartStorage();
 
   }
+
   removeFromCart(cartItem: CartItem) {
     const cartIndex = this.cartItems.findIndex(
       tempCartItem => tempCartItem.id === cartItem.id
@@ -73,7 +119,7 @@ export class CartService {
     if (cartIndex > -1)
       this.cartItems.splice(cartIndex, 1);
 
-    this.computeCartTotals();
+    this.updateCart();
   }
 
   decrementQuantity(cartItem: CartItem) {
@@ -84,8 +130,12 @@ export class CartService {
       this.removeFromCart(cartItem);
     }
 
-    this.computeCartTotals();
+    this.updateCart();
+  }
 
+  private updateCart() {
+    this.computeCartTotals();
+    this.saveCart(this.cartItems, this.totalPrice.getValue(), this.totalQuantity.getValue());
   }
 
 
