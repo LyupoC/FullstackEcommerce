@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { CartItem } from '../../common/cart-item';
 import { Product } from '../../common/product';
-import { ModelItemAddedToCartComponent } from '../../others/model-item-added-to-cart/model-item-added-to-cart.component';
 import { CartService } from '../../services/cart.service';
 import { ModalDialogsService } from '../../services/modal-dialogs.service';
 import { ProductService } from '../../services/product.service';
