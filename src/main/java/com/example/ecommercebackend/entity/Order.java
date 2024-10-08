@@ -30,11 +30,8 @@ public class Order {
     @Column(name = "total_quantity")
     private int totalQuantity;
 
-
     @Column(name ="status")
     private String status;
-
-
     @Column(name ="date_created")
     @CreationTimestamp
     private Calendar dateCreated;
@@ -42,7 +39,6 @@ public class Order {
     @Column(name = "last_updated")
     @UpdateTimestamp
     private Calendar lastUpdated;
-
 
     @OneToOne(cascade = CascadeType.ALL)
         @JoinColumn(name="billing_address_id", referencedColumnName = "id")
