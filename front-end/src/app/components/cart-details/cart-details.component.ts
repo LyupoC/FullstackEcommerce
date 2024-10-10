@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CartItem } from '../../common/cart-item';
 import { CartService } from '../../services/cart.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-cart-details',
@@ -8,7 +9,7 @@ import { CartService } from '../../services/cart.service';
   styleUrls: ['./cart-details.component.css']
 })
 
-export class CartDetailsComponent implements OnInit {
+export class CartDetailsComponent implements OnInit, OnDestroy {
   cartItems: CartItem[] = [];
 
   subTotalPrice: number = 0;
@@ -18,7 +19,8 @@ export class CartDetailsComponent implements OnInit {
 
   shipping: number = 10;
 
-
+  private totalPriceSubscription: Subscription | undefined;
+  private totalQuantitySubscription: Subscription | undefined;
 
   constructor(private cartService: CartService) { }
 
@@ -26,21 +28,18 @@ export class CartDetailsComponent implements OnInit {
     this.listCartDetails();
   }
 
-
   listCartDetails() {
 
-    this.cartService.totalPrice.subscribe(
-      data => { this.subTotalPrice = data; this.totalPrice = data + this.shipping;  }
+    this.totalPriceSubscription = this.cartService.totalPrice.subscribe(
+      data => { this.subTotalPrice = data; this.totalPrice = data + this.shipping; }
     );
 
-    this.cartService.totalQuantity.subscribe(
+    this.totalQuantitySubscription = this.cartService.totalQuantity.subscribe(
       data => this.totalQuantity = data
     );
 
     this.cartItems = this.cartService.cartItems;
 
-
-    this.cartService.computeCartTotals();
   }
 
   incrementQuantity(cartItem: CartItem) {
@@ -53,6 +52,15 @@ export class CartDetailsComponent implements OnInit {
   }
   removeFromCart(cartItem: CartItem) {
     this.cartService.removeFromCart(cartItem);
+  }
+
+  ngOnDestroy() {
+    if (this.totalPriceSubscription) {
+      this.totalPriceSubscription.unsubscribe();
+    }
+    if (this.totalQuantitySubscription) {
+      this.totalQuantitySubscription.unsubscribe();
+    }
   }
 
 }

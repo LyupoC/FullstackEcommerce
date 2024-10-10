@@ -17,24 +17,29 @@ export class ModalDialogsService {
 
 
   openLoadingDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
+
+    this.closeLoadingDialog();
+
     this.loadingModalDialog = this.dialog.open(ModalLoadingComponent, {
 
       enterAnimationDuration,
       exitAnimationDuration
     });
+
   }
 
   closeLoadingDialog() {
     this.loadingModalDialog?.close();
   }
 
-  openAddedToCartDialog(enterAnimationDuration: string, exitAnimationDuration: string, product: Product): void {
+  openAddedToCartDialog(enterAnimationDuration: string, exitAnimationDuration: string, product: Product, count:number = 1): void {
     this.dialog.open(ModelItemAddedToCartComponent, {
       width: '450px',
       enterAnimationDuration,
       exitAnimationDuration,
       data: {
-        "product": product
+        "product": product,
+        "count" : count
       }
     });
   }
@@ -46,7 +51,7 @@ export class ModalDialogsService {
       exitAnimationDuration,
       data: {
         "trackingNumber": trackingNumber
-      }
+      } 
     });
 
   }

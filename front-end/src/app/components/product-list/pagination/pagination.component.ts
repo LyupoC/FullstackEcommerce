@@ -16,15 +16,16 @@ export class PaginationComponent implements OnInit,OnChanges {
 
   pages: number[] =[];
   activePage: number = this.page;
+  totalPages = 0;
   constructor() { }
 
   ngOnChanges(changes: SimpleChanges){
     this.activePage = this.page;
     this.pages=[];
     
-    const totalPages= Math.ceil(this.totalElements/this.pageSize);
+    this.totalPages= Math.ceil(this.totalElements/this.pageSize);
 
-    for(var i = this.page -1; i <= Math.min((this.page + 1), totalPages);i++ ){
+    for(var i = this.page -1; i <= Math.min(this.totalPages, this.page +1); i++ ){
 
       this.pages.push(i);
 
@@ -37,7 +38,7 @@ export class PaginationComponent implements OnInit,OnChanges {
   }
 
   increment(): void{
-        if(this.page >= this.pages.length ){
+        if(this.page >= this.totalPages){
              return;
         }
 

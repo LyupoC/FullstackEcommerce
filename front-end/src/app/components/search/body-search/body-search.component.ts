@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 
 import {SearchComponent} from '../search.component';
+import { SearchService } from '../../../services/search.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 
 @Component({
@@ -9,10 +10,11 @@ import {SearchComponent} from '../search.component';
   templateUrl: './body-search.component.html',
   styleUrls: ['./body-search.component.css']
 })
-export class BodySearchComponent extends SearchComponent  implements OnInit {
+export class BodySearchComponent extends SearchComponent implements OnInit {
 
-  constructor(router: Router) {
-    super(router);
+
+  constructor(searchService: SearchService, route: ActivatedRoute, router: Router) {
+    super(searchService, route, router);
   }
 
 

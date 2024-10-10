@@ -4,6 +4,7 @@
          class="form-control"
          (keyup.enter)="doSearch(myInput.value)"
          placeholder="Search by name"
+         [(ngModel)]="searchKeyword"
          >
   <div class="input-group-append">
     <span (click)="doSearch(myInput.value)"

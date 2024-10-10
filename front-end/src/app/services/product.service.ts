@@ -10,13 +10,15 @@ import { ProductCategory } from '../common/product-category';
 })
 export class ProductService {
 
-  private baseUrl = 'https://backend-web-service-ecom.onrender.com/products';
-  private categoryUrl = 'https://backend-web-service-ecom.onrender.com/product-category';
+  //private baseUrl = 'https://backend-web-service-ecom.onrender.com/products';
+  //private categoryUrl = 'https://backend-web-service-ecom.onrender.com/product-category';
+
+
+
+  private baseUrl = 'http://localhost:8080/products';
+  private categoryUrl = 'http://localhost:8080/product-category';
 
   constructor(private httpClient: HttpClient) { }
-
-
-
 
   getProduct(theProductId: number): Observable<Product> {
     const productUrl = `${this.baseUrl}/${theProductId}`;
@@ -29,7 +31,6 @@ export class ProductService {
       map(response => response._embedded.productCategory)
     );
   }
-
 
   getProductList(categoryid: number): Observable<Product[]> {
     const searchUrl = `${this.baseUrl}/search/findByCategoryId?id=${categoryid}`;
@@ -53,15 +54,50 @@ export class ProductService {
     return this.searchProducts(searchUrl);
   }
 
+
   getHighestRated8Products(): Observable<Product[]> {
     const searchUrl = `${this.baseUrl}/search/findFirst8ByOrderByRating`;
     return this.searchProducts(searchUrl);
   }
 
-  getProductsPaginate(page:number, pageSize:number, categoryId: number) : Observable<GetResponseProducts>{
-     const searchUrl = `${this.baseUrl}/search/findByCategoryId?id=${categoryId}&page=${page}&size=${pageSize}`;
-     return this.httpClient.get<GetResponseProducts>(searchUrl);
-   }
+  getProductsPaginate(page: number, pageSize: number, categoryId: number): Observable<GetResponseProducts> {
+    const searchUrl = `${this.baseUrl}/search/findByCategoryId?id=${categoryId}&page=${page}&size=${pageSize}`;
+    return this.httpClient.get<GetResponseProducts>(searchUrl);
+  }
+
+
+  getProductsFilterPaginate(page: number, pageSize: number, categoryId: number | null, minPrice: number, maxPrice: number, inStock: boolean, inOnSale: boolean, isLimited: boolean, isStaffRecommended: boolean, sortBy: string | null, keyWords: string = ""): Observable<GetResponseProducts> {
+
+
+    const queryParams: string[] = [
+      `page=${page}`,
+      `size=${pageSize}`,
+      `minPrice=${minPrice}`,
+      `maxPrice=${maxPrice}`,
+      `inStock=${inStock}`,
+      `inOnSale=${inOnSale}`,
+      `isLimited=${isLimited}`,
+      `isStaffRecommended=${isStaffRecommended}`,
+    ];
+
+
+    if (categoryId !== null) {
+      queryParams.push(`category=${categoryId}`);
+    }
+
+    if (sortBy != null) {
+      queryParams.push(`sortBy=${sortBy}`);
+    }
+
+    if (keyWords) {
+      queryParams.push(`keyWords=${keyWords}`);
+    }
+
+    const searchUrl = `${this.baseUrl}/search?${queryParams.join('&')}`;
+
+    return this.httpClient.get<GetResponseProducts>(searchUrl);
+  }
+
 }
 
 
@@ -70,10 +106,18 @@ interface GetResponseProducts {
   _embedded: {
     products: Product[];
   }
-  page:{
-    size:number,
-    totalElements:number,
-    totalPages:number,
+
+  productFlags: {
+    inStockCount: number,
+    limitedCount: number,
+    onSaleCount: number,
+    staffRecommendedCount: number
+  }
+
+  page: {
+    size: number,
+    totalElements: number,
+    totalPages: number,
     number: number
   }
 }

@@ -1,14 +1,14 @@
 import { CartItem } from "./cart-item";
+import { Product } from "./product";
 
 export class OrderItem {
 
-
-
-
-  imageUrl: string ;
+  imageUrl: string;
+  name: string;
   quantity: number;
   unitPrice: number;
-  productId: string;
+  productId: number;
+  product: Product | null = null;
 
   constructor(cartItem: CartItem) {
 
@@ -16,6 +16,7 @@ export class OrderItem {
     this.quantity = cartItem.quantity;
     this.unitPrice = cartItem.unitPrice;
     this.productId = cartItem.id;
+    this.name = cartItem.name;
 
   }
 }

@@ -1,0 +1,36 @@
+.search-container {
+  display: inline-block; /* Ensure it behaves like an inline element */
+  width: 0; /* Start with a width of 0 */
+  overflow: hidden; /* Hide overflow to prevent content from showing when collapsed */
+  transition: width 0.3s ease; /* Transition for width */
+}
+
+  .search-container.active {
+    width: 200px; /* Set the desired width when active */
+  }
+
+input {
+  width: 100%; /* Make the input take the full width of the container */
+  opacity: 0; /* Start with input hidden */
+  transition: opacity 0.3s ease; /* Transition for opacity */
+}
+
+.search-container.active input {
+  opacity: 1; /* Make the input visible when active */
+}
+
+
+@media (max-width: 990px) {
+  .search-container {
+    transition: none; /* Disable width transition in mobile view */
+    width: auto; /* Allow the width to be set automatically */
+  }
+
+    .search-container.active {
+      width: auto; /* Allow the active state to take its natural width */
+    }
+
+  input {
+    opacity: 1; /* Ensure input is visible without transition in mobile view */
+  }
+}

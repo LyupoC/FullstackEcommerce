@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Address } from '../../common/address';
@@ -13,6 +13,7 @@ import { CheckoutService } from '../../services/checkout.service';
 import { CustomFormValidators } from '../../validators/custom-form-validators';
 import { Router } from '@angular/router'; 
 import { ModalDialogsService } from '../../services/modal-dialogs.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-checkout',
@@ -23,7 +24,7 @@ import { ModalDialogsService } from '../../services/modal-dialogs.service';
     class: "row"
   }
 })
-export class CheckoutComponent implements OnInit {
+export class CheckoutComponent implements OnInit, OnDestroy {
 
   cartItems: CartItem[] = [];
 
@@ -31,6 +32,10 @@ export class CheckoutComponent implements OnInit {
   totalPrice: number = 0;
   shipping: number = 10;
   totalQuantity: number = 0;
+
+  private totalPriceSubscription: Subscription | undefined;
+  private totalQuantitySubscription: Subscription | undefined;
+
 
   checkoutFormGroup: FormGroup = this.formBuilder.nonNullable.group({
 
@@ -112,7 +117,7 @@ export class CheckoutComponent implements OnInit {
         this.dialogService.openOrderTrackingNumberDialog('0ms', '5ms', data.orderTrackingNumber);
 
         this.dialogService.getTrackingNumberDialogCloseHandler().subscribe(() => {
-          this.cartService.empty();
+          this.cartService.clearCart();
           this.router.navigate(["/home"]);
         });
         
@@ -123,11 +128,11 @@ export class CheckoutComponent implements OnInit {
 
   listCartDetails() {
 
-    this.cartService.totalPrice.subscribe(
+    this.totalPriceSubscription = this.cartService.totalPrice.subscribe(
       data => { this.subTotalPrice = data; this.totalPrice = data + this.shipping; }
     );
 
-    this.cartService.totalQuantity.subscribe(
+    this.totalQuantitySubscription=  this.cartService.totalQuantity.subscribe(
       data => this.totalQuantity = data
     );
 
@@ -163,5 +168,17 @@ export class CheckoutComponent implements OnInit {
   get shippingMobile() { return this.checkoutFormGroup.get('shippingAddress.mobile'); }
   get shippingAddressLine1() { return this.checkoutFormGroup.get('shippingAddress.addressLine1'); }
   get shippingAddressLine2() { return this.checkoutFormGroup.get('shippingAddress.addressLine2'); }
+
+
+
+  ngOnDestroy() {
+    if (this.totalPriceSubscription) {
+      this.totalPriceSubscription.unsubscribe();
+    }
+    if (this.totalQuantitySubscription) {
+      this.totalQuantitySubscription.unsubscribe();
+    }
+  }
+
 
 }

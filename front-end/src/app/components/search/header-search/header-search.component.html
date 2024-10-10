@@ -1,13 +1,42 @@
-<div class="input-group">
-  <input #myInput type="text"
-         class="form-control"
-         style="border:solid 2px #7FAD39;"
-         (keyup.enter)="doSearch(myInput.value)"
-         placeholder="Search for products">
 
-  <div class="input-group-append">
-    <span class="input-group-text bg-transparent m-0 p-0">
-      <a (click)="doSearch(myInput.value)" class="btn btn-light m-0 ml-1">SEARCH</a>
-    </span>
+
+<div class="d-flex  ">
+  <div [ngClass]="{'active': isSearchVisible}" class="search-container p-0 m-0 rounded ">
+    <div class="">
+      <input #myInput type="text"
+             class="form-control mt-1 rounded"
+             style="border: solid 2px #BDD239;"
+             (keyup.enter)="doSearch(myInput.value)"
+              [(ngModel)]="searchKeyword"
+             placeholder="Search for products">
+
+      <div class="input-group-append">
+        <!--<span class="input-group-text bg-transparent m-0 p-0">
+          <a (click)="doSearch(myInput.value)" class="btn btn-light m-0 ml-1">SEARCH</a>
+        </span>-->
+      </div>
+    </div>
+
   </div>
+
+  <a class="p-2 " data-toggle="collapse" href="#collapseExample" role="button" (click)="toggleSearch()" aria-expanded="false" aria-controls="collapseExample">
+    <i class="fa fa-search" style="color:#666;" aria-hidden="true"></i>
+  </a>
+
 </div>
+
+<script>
+  const collapseInput = document.getElementById('collapseInput');
+  const collapseExample = document.getElementById('collapseExample');
+
+  collapseInput.addEventListener('input', function () {
+    console.log(collapseInput);
+    if (this.value.trim() !== '') {
+      collapseExample.classList.remove('collapsing');
+      collapseExample.classList.add('show');
+    } else {
+      collapseExample.classList.add('collapsing');
+      collapseExample.classList.remove('show');
+    }
+  });
+</script>

@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { ProductCategory } from '../../common/product-category';
 import { ProductService } from '../../services/product.service';
+import { NavigationEnd, Router } from '@angular/router';
 declare var jQuery: any;
 
 
@@ -11,9 +12,18 @@ declare var jQuery: any;
 })
 export class CategoryListComponent implements OnInit {
 
+  isDropdownOpen: boolean = false;
   productCategories: ProductCategory[] = [];
 
-  constructor(private productCategoryService: ProductService) { }
+  constructor(private productCategoryService: ProductService, private router: Router) {
+
+    // Subscribe to router events to close the dropdown menu on route change
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        this.isDropdownOpen = false;
+      }
+    });
+  }
 
 
   ngOnInit(): void {
@@ -27,5 +37,22 @@ export class CategoryListComponent implements OnInit {
       this.productCategories = data;
 
     });
+  }
+  toggleNavbar() {
+    this.isDropdownOpen = !this.isDropdownOpen;
+  }
+
+  @HostListener('document:click', ['$event'])
+  @HostListener('document:mouseover', ['$event'])
+  onEvent(event: MouseEvent) {
+
+    const clickedElement = event.target as HTMLElement;
+    const isDropdownToggle = clickedElement.classList.contains('dropdown-toggle');
+    const isDropdownMenu = clickedElement.classList.contains('dropdown-menu');
+    const isNavbar = clickedElement.closest('.navbar');
+
+    if (!isDropdownToggle && !isDropdownMenu && !isNavbar) {
+      this.isDropdownOpen = false;
+    }
   }
 }

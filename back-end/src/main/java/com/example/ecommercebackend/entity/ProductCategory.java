@@ -1,6 +1,7 @@
 package com.example.ecommercebackend.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -21,6 +22,7 @@ public class ProductCategory {
     private String name;
 
     @OneToMany(cascade =CascadeType.ALL, mappedBy = "category")
+    @JsonManagedReference
     private List<Product> products = new ArrayList<>();
 
 }
